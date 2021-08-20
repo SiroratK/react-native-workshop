@@ -1,6 +1,5 @@
 import axios, {AxiosResponse} from 'axios';
-import {PostType} from '../models/post.interface';
-
+import {Case} from '../models/caseData.interface';
 const instance = axios.create({
   baseURL: 'https://covid-api.mmediagroup.fr/v1',
   timeout: 15000,
@@ -16,5 +15,7 @@ const requests = {
 };
 
 export const covidApi = {
-  getCase: (): Promise<any> => requests.get('/cases'),
+  getCase: (): Promise<Case> => requests.get('/cases'),
+  getCaseByCountry: (country: string): Promise<any> =>
+    requests.get(`/cases?country=${country}`),
 };

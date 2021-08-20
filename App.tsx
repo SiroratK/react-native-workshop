@@ -34,6 +34,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import HomeScreen from './src/screen/HomeScreen';
 import Country from './src/screen/Country';
 import AboutPage from './src/screen/AboutPage';
+import Navigation from './src/navigation';
 const Section: React.FC<{
   title: string;
 }> = ({children, title}) => {
@@ -62,16 +63,6 @@ const Section: React.FC<{
   );
 };
 
-// function HomeScreen() {
-//   return (
-//     <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-//       <Text>
-//         Lorem <Ionicons name="home" color="#4F8EF7" /> YEY Ipsum
-//       </Text>
-//     </View>
-//   );
-// }
-
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -82,65 +73,7 @@ const App = () => {
     backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
   };
 
-  return (
-    <NavigationContainer>
-      {/* <Stack.Navigator>
-        <Stack.Screen name="Covid-19" component={HomeScreen} />
-      </Stack.Navigator> */}
-      <Tab.Navigator
-        screenOptions={({route}) => ({
-          tabBarIcon: ({focused, color, size}) => {
-            let iconName;
-
-            if (route.name === 'Home') {
-              iconName = focused ? 'globe' : 'globe';
-            } else if (route.name === 'Country') {
-              iconName = focused ? 'search' : 'search';
-            } else if (route.name === 'About') {
-              iconName = focused
-                ? 'information-circle-outline'
-                : 'information-circle-outline';
-            }
-
-            // You can return any component that you like here!
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-          tabBarActiveTintColor: 'tomato',
-          tabBarInactiveTintColor: 'gray',
-        })}>
-        <Tab.Screen name="Home" component={HomeScreen} />
-        <Tab.Screen name="Country" component={Country} />
-        <Tab.Screen name="About" component={AboutPage} />
-      </Tab.Navigator>
-    </NavigationContainer>
-    // <SafeAreaView style={backgroundStyle}>
-    //   <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-    //   <ScrollView
-    //     contentInsetAdjustmentBehavior="automatic"
-    //     style={backgroundStyle}>
-    //     <Header />
-    //     <View
-    //       style={{
-    //         backgroundColor: isDarkMode ? Colors.black : Colors.white,
-    //       }}>
-    //       <Section title="Step One">
-    //         Edit <Text style={styles.highlight}>App.js</Text> to change this
-    //         screen and then come back to see your edits.
-    //       </Section>
-    //       <Section title="See Your Changes">
-    //         <ReloadInstructions />
-    //       </Section>
-    //       <Section title="Debug">
-    //         <DebugInstructions />
-    //       </Section>
-    //       <Section title="Learn More">
-    //         Read the docs to discover what to do next:
-    //       </Section>
-    //       <LearnMoreLinks />
-    //     </View>
-    //   </ScrollView>
-    // </SafeAreaView>
-  );
+  return <Navigation />;
 };
 
 const styles = StyleSheet.create({
