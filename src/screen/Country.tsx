@@ -5,6 +5,8 @@ import {covidApi} from '../api/api';
 import {MapCountry} from '../models/caseData.interface';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DetailsPage from './DetailsPage';
+import { selectedCountryState } from '../atoms/country';
+import { useRecoilState } from 'recoil';
 const HomeStack = createNativeStackNavigator();
 
 function Country() {
@@ -16,18 +18,23 @@ function Country() {
   );
 }
 
-const Item = ({title,navigation}) => (
-  <TouchableOpacity style={styles.item} onPress={() => navigation.navigate('Details', {
-    country: title,
-  })}>
-    <Text style={styles.title}>{title}</Text>
-  </TouchableOpacity>
-);
-
 function CountryElement({navigation}) {
   const [country, setCountry] = useState<MapCountry>();
-  // const [data, setData] = useState<Case>();
-  // const [selectedCountry, setSelectedCountry] = useState<String>('');
+  const [selectedCountry, setSelectedCountry ] = useRecoilState(selectedCountryState)
+
+  const handlePressCountry = (country) => {
+    setSelectedCountry(country)
+  }
+
+  const Item = ({title}) => (
+    <TouchableOpacity style={styles.item} onPress={() => handlePressCountry(title)}>
+      <Text style={styles.title}>{title}</Text>
+    </TouchableOpacity>
+  );
+
+  useEffect(() => {
+    navigation.navigate('Details');
+  }, [selectedCountry])
 
   useEffect(() => {
     var result: Array = [];
@@ -46,6 +53,7 @@ function CountryElement({navigation}) {
   const renderItem = ({item}) => {
     return <Item title={item.country} navigation={navigation}/>;
   };
+  console.log("selectedCountry",selectedCountry)
 
   return (
     <View>
