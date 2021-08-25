@@ -1,6 +1,6 @@
 import React from 'react';
 import {ScrollView, Text, View, StyleSheet} from 'react-native';
-import moment from 'moment';
+import moment, {max} from 'moment';
 function CovidReportTemplate({covidCaseData}) {
   const d = new Date();
   const country = covidCaseData?.All.country
@@ -8,14 +8,16 @@ function CovidReportTemplate({covidCaseData}) {
     : 'Global';
   return (
     <ScrollView style={styles.container}>
-      <Text style={{fontSize: 30, paddingBottom: 20}}>Covid-19 Report {country}</Text>
+      <Text style={{fontSize: 30, paddingBottom: 20}}>
+        Covid-19 Report {country}
+      </Text>
       <View style={styles.dateWrap}>
         <Text style={{fontSize: 20, color: 'white'}}>
           {moment(d).locale('th').format('YYYY MM DD')}
         </Text>
       </View>
-      <View style={styles.wrapCard}>
-        <View style={styles.card}>
+      <View style={styles.row}>
+        <View style={styles.cardFirst}>
           <Text style={{fontSize: 20, color: 'red', fontWeight: 'bold'}}>
             ผู้ติดเชื้อ
           </Text>
@@ -23,6 +25,7 @@ function CovidReportTemplate({covidCaseData}) {
             {covidCaseData?.All.confirmed}
           </Text>
         </View>
+        <View style={styles.space} />
         <View style={styles.card}>
           <Text style={{fontSize: 20, color: 'green', fontWeight: 'bold'}}>
             หายป่วย
@@ -56,16 +59,32 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 5,
   },
-  wrapCard: {
+  row: {
     flexDirection: 'row',
+    flexWrap: 'wrap',
     height: 100,
-    justifyContent: 'space-between',
+  },
+  cardFirst: {
+    backgroundColor: 'white',
+    borderRadius: 10,
+    padding: 10,
+    flex: 1,
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    alignSelf: 'flex-start',
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  space: {
+    width: 10,
   },
   card: {
     backgroundColor: 'white',
     borderRadius: 10,
     padding: 10,
-    flex: 0.47,
+    flex: 1,
     shadowOffset: {
       width: 0,
       height: 2,

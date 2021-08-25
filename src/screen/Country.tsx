@@ -7,9 +7,11 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import DetailsPage from './DetailsPage';
 import { selectedCountryState } from '../atoms/country';
 import { useRecoilState } from 'recoil';
+import { StackActions } from '@react-navigation/native';
+
 const HomeStack = createNativeStackNavigator();
 
-function Country() {
+function Country({navigation}) {
   return (
     <HomeStack.Navigator  >
       <HomeStack.Screen name="Country" component={CountryElement} />
