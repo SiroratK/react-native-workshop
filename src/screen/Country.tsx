@@ -30,14 +30,13 @@ function Country({}) {
 function CountryElement() {
   const [countryList, setCountryList] = useState<Object[]>();
   const [filterCountry, setFilterCountry] = useState<Object[] | undefined>();
+  const navigation = useNavigation();
+  const [text, onChangeText] = React.useState<String>('');
+  
   const [selectedCountry, setSelectedCountry] =
     useRecoilState(selectedCountryState);
-  const navigation = useNavigation();
-
-  const [text, onChangeText] = React.useState<String>('');
 
   const handlePressCountry = (item: String) => {
-    // const delay = t => new Promise(resolve => setTimeout(resolve, t));
     setTimeout(() => {
       setSelectedCountry(item);
     }, 0);
