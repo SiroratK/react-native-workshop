@@ -5,11 +5,7 @@ import AboutPage from '../screen/AboutPage';
 import Country from '../screen/Country';
 import HomeScreen from '../screen/HomeScreen';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import {createStackNavigator} from '@react-navigation/stack';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import DetailsPage from '../screen/DetailsPage';
-
-const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 const Navigation = () => {
   return (
@@ -17,7 +13,7 @@ const Navigation = () => {
       <Tab.Navigator
         screenOptions={({route}) => ({
           tabBarIcon: ({focused, color, size}) => {
-            let iconName;
+            let iconName: string = '';
 
             if (route.name === 'Home') {
               iconName = focused ? 'globe' : 'globe';
@@ -34,7 +30,7 @@ const Navigation = () => {
           },
           tabBarActiveTintColor: 'tomato',
           tabBarInactiveTintColor: 'gray',
-          headerShown: route.name === 'Country'? false:true
+          headerShown: route.name === 'Country' ? false : true,
         })}>
         <Tab.Screen name="Home" component={HomeScreen} />
         <Tab.Screen name="Country" component={Country} />

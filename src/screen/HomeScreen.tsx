@@ -1,12 +1,17 @@
 import React, {useEffect, useState} from 'react';
-import {ScrollView, Text, View, StyleSheet} from 'react-native';
-import moment from 'moment';
+import {ScrollView, StyleSheet} from 'react-native';
 import {covidApi} from '../api/api';
-import { useRecoilValue } from 'recoil'
-import { selectedCountryState } from '../atoms/country';
 import CovidReportTemplate from '../component/CovidReportTemplate';
-function HomeScreen() {
-  const [covidCaseData, setCovidCaseData] = useState<any>(null);
+import {All} from '../models/caseData.interface';
+// import Icon from 'react-native-vector-icons/FontAwesome';
+function HomeScreen({}) {
+  const [covidCaseData, setCovidCaseData] = useState<All>();
+
+  // React.useLayoutEffect(() => {
+  //   navigation.setOptions({
+  //     headerRight: () => <Button title="Feed back" />,
+  //   });
+  // }, [navigation]);
 
   useEffect(() => {
     covidApi.getCase().then(data => {
@@ -15,13 +20,18 @@ function HomeScreen() {
     });
   }, []);
 
-  const value = useRecoilValue(selectedCountryState)
   return (
     // <covidReportTemplate/>
-    <View>
-      <CovidReportTemplate covidCaseData={covidCaseData}/>
-    </View>
+    <ScrollView style={styles.container}>
+      <CovidReportTemplate covidCaseData={covidCaseData} />
+    </ScrollView>
   );
 }
 
 export default HomeScreen;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

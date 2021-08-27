@@ -1,10 +1,10 @@
 import React from 'react';
 import {ScrollView, Text, View, StyleSheet} from 'react-native';
-import moment, {max} from 'moment';
-function CovidReportTemplate({covidCaseData}) {
+import moment from 'moment';
+function CovidReportTemplate({covidCaseData}: any) {
   const d = new Date();
-  const country = covidCaseData?.All.country
-    ? covidCaseData?.All.country
+  const country: String = covidCaseData?.All?.country
+    ? covidCaseData?.All?.country
     : 'Global';
   return (
     <ScrollView style={styles.container}>
@@ -22,7 +22,7 @@ function CovidReportTemplate({covidCaseData}) {
             ผู้ติดเชื้อ
           </Text>
           <Text style={{fontSize: 24, paddingVertical: 8}}>
-            {covidCaseData?.All.confirmed}
+            {covidCaseData?.All?.confirmed}
           </Text>
         </View>
         <View style={styles.space} />
@@ -31,15 +31,15 @@ function CovidReportTemplate({covidCaseData}) {
             หายป่วย
           </Text>
           <Text style={{fontSize: 24, paddingVertical: 8}}>
-            {covidCaseData?.All.recovered}
+            {covidCaseData?.All?.recovered}
           </Text>
         </View>
       </View>
       <Text style={{fontSize: 20, paddingVertical: 10}}>
-        ผุ้เสียชีวิต:{covidCaseData?.All.deaths}
+        ผุ้เสียชีวิต:{covidCaseData?.All?.deaths}
       </Text>
       <Text style={{fontSize: 20}}>
-        จำนวนประชากกรทั้งหมด:{covidCaseData?.All.population}{' '}
+        จำนวนประชากกรทั้งหมด:{covidCaseData?.All?.population}{' '}
       </Text>
     </ScrollView>
   );
